@@ -101,6 +101,7 @@ class Ui_MainWindow(object):
             bars = int(self.bars_input.text())
         except ValueError:
             self.user_feedback.setText("Invalid Parameter.")
+            return
 
         if interval and bars:
             self.melody_bar.generate_melody(bars, interval)
@@ -115,6 +116,7 @@ class Ui_MainWindow(object):
             bpm = int(self.bpm_input.text())
         except ValueError:
             self.user_feedback.setText("Invalid Parameter.")
+            return
 
         if bpm:
             if self.melody_bar is not None:

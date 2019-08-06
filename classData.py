@@ -19,6 +19,8 @@ class MelodyBar(object):
         self.notes = []
 
     def generate_melody(self, number_bars, max_interval):
+        self.notes.clear()
+
         lenght_bar = 0
         last_note = MusicalNote()
 
