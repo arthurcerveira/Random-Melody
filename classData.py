@@ -28,12 +28,7 @@ class MelodyBar(object):
         while lenght_bar != 64 * number_bars:
             note = MusicalNote()
 
-            # Impede que a primeira nota seja uma pausa
-            if lenght_bar == 0 and not note.on_or_off:
-                continue
-
-            # Impede que ocorram duas pausas seguidas
-            if last_note.on_or_off is False and note.on_or_off is False:
+            if self.note_is_valid(lenght_bar, note.on_or_off, last_note.on_or_off) is False:
                 continue
 
             # Testa se a nota ultrapassa o limite de tempo
@@ -56,11 +51,21 @@ class MelodyBar(object):
             else:
                 print("Break " + str(note.lenght))
 
+    @staticmethod
+    def note_is_valid(lenght_bar, note_on_or_off, last_note_on_or_off):
+        # Impede que a primeira nota seja uma pausa
+        if lenght_bar == 0 and not note_on_or_off:
+            return False
+
+        # Impede que ocorram duas pausas seguidas
+        if last_note_on_or_off is False and note_on_or_off is False:
+            return False
+
 
 class MelodyPlayer(object):
     def __init__(self):
         self.player = Player()
-        self.synthesizer = Synthesizer(osc1_waveform=Waveform.sine, osc1_volume=1.0, use_osc2=False)
+        self.synthesizer = Synthesizer(osc1_waveform=Waveform.sawtooth, osc1_volume=1.0, use_osc2=False)
 
     def play_melody(self, melody, bpm):
         self.player.open_stream()
@@ -74,3 +79,6 @@ class MelodyPlayer(object):
             else:
                 # Caso seja uma pausa, não toca nota
                 self.player.play_wave(self.synthesizer.generate_constant_wave(0, time))
+
+    def save_melody(self, melody, bpm):
+        pass
