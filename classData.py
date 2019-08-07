@@ -1,6 +1,7 @@
 from random import randint
 from auxData import notes_lenght, notes_value
-from synthesizer import Synthesizer, Player, Waveform
+from synthesizer import Synthesizer, Player, Waveform, Writer
+import wave, os
 
 
 class MusicalNote(object):
@@ -71,14 +72,65 @@ class MelodyPlayer(object):
         self.player.open_stream()
 
         for note in melody.notes:
-            time = note.lenght/16 * 60/bpm
+            lenght = note.lenght/16 * 60/bpm
 
             if note.on_or_off:
                 frequency = note.note[1]
-                self.player.play_wave(self.synthesizer.generate_constant_wave(frequency, time))
+                self.player.play_wave(self.synthesizer.generate_constant_wave(frequency, lenght))
             else:
                 # Caso seja uma pausa, não toca nota
-                self.player.play_wave(self.synthesizer.generate_constant_wave(0, time))
+                self.player.play_wave(self.synthesizer.generate_constant_wave(0, lenght))
 
     def save_melody(self, melody, bpm):
-        pass
+        writer = Writer()
+        outfile = "melody.wav"
+        next_note = "note.wav"
+        current_note = "currentnote.wav"
+
+        # Gera a primeira nota
+        lenght = melody.notes[0].lenght / 16 * 60 / bpm
+        frequency = melody.notes[0].note[1]
+
+        sound = self.synthesizer.generate_constant_wave(frequency, lenght)
+        writer.write_wave(current_note, sound)
+
+        data = []
+
+        for note in melody.notes:
+            # Pula a primeira
+            if note == melody.notes[0]:
+                continue
+
+            lenght = note.lenght / 16 * 60 / bpm
+
+            if note.on_or_off:
+                frequency = note.note[1]
+                sound = self.synthesizer.generate_constant_wave(frequency, lenght)
+            else:
+                # Caso seja uma pausa, não toca nota
+                sound = self.synthesizer.generate_constant_wave(0, lenght)
+
+            writer.write_wave(next_note, sound)
+
+            infiles = [current_note, next_note]
+
+            for infile in infiles:
+                w = wave.open(infile, 'rb')
+                data.append([w.getparams(), w.readframes(w.getnframes())])
+                w.close()
+
+            output = wave.open(outfile, 'wb')
+            output.setparams(data[0][0])
+            output.writeframes(data[0][1])
+            output.writeframes(data[1][1])
+            output.close()
+
+            # Deleta o arquivo da nota
+            os.remove(current_note)
+            os.remove(next_note)
+            os.rename(outfile, current_note)
+
+            data.clear()
+
+        # Renomeia de volta o arquivo que contem a melodia
+        os.rename(current_note, outfile)

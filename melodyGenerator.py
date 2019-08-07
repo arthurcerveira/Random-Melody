@@ -6,3 +6,5 @@ melody_bar.print_melody()
 
 melody_player = MelodyPlayer()
 melody_player.play_melody(melody_bar, 120)
+
+melody_player.save_melody(melody_bar, 120)
