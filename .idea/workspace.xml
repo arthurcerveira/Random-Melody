@@ -4,7 +4,6 @@
     <list default="true" id="bd870093-5ad0-4253-9bc2-063d1347ffe1" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/classData.py" beforeDir="false" afterPath="$PROJECT_DIR$/classData.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/melodyGenerator.py" beforeDir="false" afterPath="$PROJECT_DIR$/melodyGenerator.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -115,7 +114,8 @@
       <workItem from="1564703082422" duration="9980000" />
       <workItem from="1564972928325" duration="1790000" />
       <workItem from="1565048514496" duration="8145000" />
-      <workItem from="1565210709760" duration="2972000" />
+      <workItem from="1565210709760" duration="3353000" />
+      <workItem from="1565278640792" duration="1589000" />
     </task>
     <servers />
   </component>
@@ -135,8 +135,19 @@
       </map>
     </option>
   </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <default-breakpoints>
+        <breakpoint type="python-exception">
+          <properties notifyOnTerminate="true" exception="BaseException">
+            <option name="notifyOnTerminate" value="true" />
+          </properties>
+        </breakpoint>
+      </default-breakpoints>
+    </breakpoint-manager>
+  </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/Random_Melody_Generator$GUI.coverage" NAME="GUI Coverage Results" MODIFIED="1565212294744" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/Random_Melody_Generator$melodyGenerator.coverage" NAME="melodyGenerator Coverage Results" MODIFIED="1565213685499" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/Random_Melody_Generator$melodyGenerator.coverage" NAME="melodyGenerator Coverage Results" MODIFIED="1565280234139" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>
