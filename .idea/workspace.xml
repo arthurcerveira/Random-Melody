@@ -3,7 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="bd870093-5ad0-4253-9bc2-063d1347ffe1" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classData.py" beforeDir="false" afterPath="$PROJECT_DIR$/classData.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GUI.py" beforeDir="false" afterPath="$PROJECT_DIR$/GUI.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -47,7 +47,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.melodyGenerator">
+  <component name="RunManager" selected="Python.GUI">
     <configuration name="GUI" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="Random_Melody_Generator" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -94,8 +94,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.melodyGenerator" />
         <item itemvalue="Python.GUI" />
+        <item itemvalue="Python.melodyGenerator" />
       </list>
     </recent_temporary>
   </component>
@@ -115,7 +115,9 @@
       <workItem from="1564972928325" duration="1790000" />
       <workItem from="1565048514496" duration="8145000" />
       <workItem from="1565210709760" duration="3353000" />
-      <workItem from="1565278640792" duration="3448000" />
+      <workItem from="1565278640792" duration="4942000" />
+      <workItem from="1565372500248" duration="423000" />
+      <workItem from="1565732869484" duration="1879000" />
     </task>
     <servers />
   </component>
@@ -137,6 +139,13 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/classData.py</url>
+          <line>96</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
       <default-breakpoints>
         <breakpoint type="python-exception">
           <properties notifyOnTerminate="true" exception="BaseException">
@@ -147,7 +156,7 @@
     </breakpoint-manager>
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/Random_Melody_Generator$GUI.coverage" NAME="GUI Coverage Results" MODIFIED="1565280540730" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/Random_Melody_Generator$melodyGenerator.coverage" NAME="melodyGenerator Coverage Results" MODIFIED="1565282032488" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/Random_Melody_Generator$GUI.coverage" NAME="GUI Coverage Results" MODIFIED="1565740596178" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/Random_Melody_Generator$melodyGenerator.coverage" NAME="melodyGenerator Coverage Results" MODIFIED="1565740200463" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>
