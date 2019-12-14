@@ -1,43 +1,57 @@
-from random import randint
-from notes import notes_lenght, notes_value
-from synthesizer import Synthesizer, Player, Waveform, Writer
 import wave
 import os
+import json
+from random import randint
+
+from synthesizer import Synthesizer, Player, Waveform, Writer
+
+REST_CHANCE = 10  # Every note has 10% chance of being a rest
+
+with open('notes.json') as notes:
+    NOTES = json.load(notes)
+
+NOTES_VALUE = NOTES["frequency"]
+NOTES_LENGHT = NOTES["lenght"]
+TOTAL_VALUES = len(NOTES_VALUE) - 1
+TOTAL_LENGHTS = len(NOTES_LENGHT) - 1
+
+MAX_INTERVAL = 5
+NUMBER_OF_BARS = 2
+BEATS_PER_MINUTE = 120
 
 
 class MusicalNote(object):
     def __init__(self):
-        # 10% de chance de ser uma pausa
-        self.on_or_off = True if randint(1, 10) < 10 else False
+        self.is_played = True if randint(1, 100) >= REST_CHANCE else False
         self.value = 0
-        if self.on_or_off:
-            # Notas de C3 a B4
-            self.value = randint(0, 13)
-            self.note = notes_value[self.value]
-        self.lenght = notes_lenght[randint(0, 4)]
+        if self.is_played:
+            self.value = randint(0, TOTAL_VALUES)
+            self.note = NOTES_VALUE[self.value]
+        self.lenght = NOTES_LENGHT[randint(0, TOTAL_LENGHTS)]
 
     def is_on_time(self, lenght_bar, number_bars):
         # Testa se a nota ultrapassa o limite de tempo
-        if self.lenght + lenght_bar <= 64 * number_bars:
-            return True
-        return False
+        max_leght = 64 * number_bars
+        current_lenght = self.lenght + lenght_bar
+        return True if current_lenght <= max_leght else False
 
-    def is_valid(self, lenght_bar, last_note_on_or_off):
+    def is_valid(self, lenght_bar, last_note_was_played):
         # Impede que a primeira nota seja uma pausa
-        if lenght_bar == 0 and not self.on_or_off:
+        if lenght_bar == 0 and not self.is_played:
             return False
 
         # Impede que ocorram duas pausas seguidas
-        if last_note_on_or_off is False and self.on_or_off is False:
+        if last_note_was_played is False and self.is_played is False:
             return False
 
         return True
 
     def is_on_interval(self, max_interval, last_note_value):
         # Não permite que a nota seja tenha um intervalo maior que o intervalo maximo
-        if last_note_value - max_interval < self.value < last_note_value + max_interval:
-            return True
-        return False
+        high_interval = last_note_value + max_interval
+        low_interval = last_note_value - max_interval
+
+        return True if low_interval < self.value < high_interval else False
 
 
 class MelodyBar(object):
@@ -54,8 +68,8 @@ class MelodyBar(object):
         while lenght_bar != 64 * number_bars:
             note = MusicalNote()
 
-            if note.is_valid(lenght_bar, last_note.on_or_off) and note.is_on_time(lenght_bar, number_bars):
-                if note.on_or_off:
+            if note.is_valid(lenght_bar, last_note.is_played) and note.is_on_time(lenght_bar, number_bars):
+                if note.is_played:
                     if note.is_on_interval(max_interval, last_note.value):
                         lenght_bar = self.add_note_to_melody(note, lenght_bar)
                         last_note = note
@@ -135,10 +149,10 @@ class MelodyPlayer(object):
 
 if __name__ == "__main__":
     melody_bar = MelodyBar()
-    melody_bar.generate_melody(2, 5)
+    melody_bar.generate_melody(NUMBER_OF_BARS, MAX_INTERVAL)
     melody_bar.print_melody()
 
     melody_player = MelodyPlayer()
-    melody_player.play_melody(melody_bar, 120)
+    melody_player.play_melody(melody_bar, BEATS_PER_MINUTE)
 
-    melody_player.save_melody(melody_bar, 120)
+    melody_player.save_melody(melody_bar, BEATS_PER_MINUTE)
