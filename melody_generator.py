@@ -1,5 +1,5 @@
 from random import randint
-from auxData import notes_lenght, notes_value
+from notes import notes_lenght, notes_value
 from synthesizer import Synthesizer, Player, Waveform, Writer
 import wave
 import os
@@ -131,3 +131,14 @@ class MelodyPlayer(object):
         else:
             # Caso seja uma pausa, não toca nota
             return self.synthesizer.generate_constant_wave(0, lenght)
+
+
+if __name__ == "__main__":
+    melody_bar = MelodyBar()
+    melody_bar.generate_melody(2, 5)
+    melody_bar.print_melody()
+
+    melody_player = MelodyPlayer()
+    melody_player.play_melody(melody_bar, 120)
+
+    melody_player.save_melody(melody_bar, 120)

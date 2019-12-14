@@ -7,7 +7,7 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-from classData import MelodyBar, MelodyPlayer
+from melody_generator import MelodyBar, MelodyPlayer
 
 
 class Ui_MainWindow(object):
@@ -90,7 +90,7 @@ class Ui_MainWindow(object):
         self.generate_melody_btn.setText(_translate("MainWindow", "Generate Melody"))
         self.play_btn.setText(_translate("MainWindow", "Play Melody"))
         self.save_btn.setText(_translate("MainWindow", "Save as WAV"))
-        self.label.setText(_translate("MainWindow", "Beats Per MInute"))
+        self.label.setText(_translate("MainWindow", "Beats Per Minute"))
         self.label_2.setText(_translate("MainWindow", "Number of Bars"))
         self.label_3.setText(_translate("MainWindow", "Max Interval"))
         self.label_4.setText(_translate("MainWindow",
