@@ -1,19 +1,82 @@
 {
-  "lenght": [64, 32, 16, 8, 4],
-  "frequency": {
-    "C3": 130.81,
-    "D3": 146.83,
-    "E3": 164.81,
-    "F3": 174.61,
-    "G3": 196.00,
-    "A3": 220.00,
-    "B3": 246.94,
-    "C4": 261.63,
-    "D4": 293.66,
-    "E4": 329.63,
-    "F4": 349.23,
-    "G4": 392.00,
-    "A4": 440.00,
-    "B4": 493.88
-  }
+    "lenghts":[
+        {
+            "duration":64,
+            "name":"Whole note"
+        },
+        {
+            "duration":32,
+            "name":"Half note"
+        },
+        {
+            "duration":16,
+            "name":"Quarter note"
+        },
+        {
+            "duration":8,
+            "name":"Eighth note"
+        },
+        {
+            "duration":4,
+            "name":"Sixteenth note"
+        }
+    ],
+    "notes":[
+        {
+            "name":"C3",
+            "frequency":130.81
+        },
+        {
+            "name":"D3",
+            "frequency":146.83
+        },
+        {
+            "name":"E3",
+            "frequency":164.81
+        },
+        {
+            "name":"F3",
+            "frequency":174.61
+        },
+        {
+            "name":"G3",
+            "frequency":196.00
+        },
+        {
+            "name":"A3",
+            "frequency":220.00
+        },
+        {
+            "name":"B3",
+            "frequency":246.94
+        },
+        {
+            "name":"C4",
+            "frequency":261.63
+        },
+        {
+            "name":"D4",
+            "frequency":293.66
+        },
+        {
+            "name":"E4",
+            "frequency":329.63
+        },
+        {
+            "name":"F4",
+            "frequency":349.23
+        },
+        {
+            "name":"G4",
+            "frequency":392.00
+        },
+        {
+            "name":"A4",
+            "frequency":440.00
+        },
+        {
+            "name":"B4",
+            "frequency":493.88
+        }
+    ]
 }
