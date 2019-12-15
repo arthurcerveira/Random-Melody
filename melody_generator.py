@@ -1,7 +1,7 @@
 import wave
 import os
 import json
-from random import randint
+import random
 
 from synthesizer import Synthesizer, Player, Waveform, Writer
 
@@ -10,90 +10,104 @@ REST_CHANCE = 10  # Every note has 10% chance of being a rest
 with open('notes.json') as notes:
     NOTES = json.load(notes)
 
-NOTES_VALUE = NOTES["frequency"]
-NOTES_LENGHT = NOTES["lenght"]
-TOTAL_VALUES = len(NOTES_VALUE) - 1
-TOTAL_LENGHTS = len(NOTES_LENGHT) - 1
+NOTES_VALUE = NOTES["notes"]
+NOTES_LENGHT = NOTES["lenghts"]
 
-MAX_INTERVAL = 5
+MAX_INTERVAL = 5  # Max interval is 5 semitones higher or lower than the previous note
 NUMBER_OF_BARS = 2
 BEATS_PER_MINUTE = 120
+
+BAR_LENGHT = 64  # The duration of a bar is 4 whole notes(16 time units)
+SHAPE = "sawtooth"
+
+WAVEFORM = {
+    "sine": Waveform.sine,
+    "sawtooth": Waveform.sawtooth,
+    "square": Waveform.square,
+    "triangle": Waveform.triangle
+}
 
 
 class MusicalNote(object):
     def __init__(self):
-        self.is_played = True if randint(1, 100) >= REST_CHANCE else False
-        self.value = 0
-        if self.is_played:
-            self.value = randint(0, TOTAL_VALUES)
-            self.note = NOTES_VALUE[self.value]
-        self.lenght = NOTES_LENGHT[randint(0, TOTAL_LENGHTS)]
+        self.is_played = True if random.randint(1, 100) >= REST_CHANCE else False
+        self.note = random.choice(NOTES_VALUE)
+        self.lenght = random.choice(NOTES_LENGHT)
 
     def is_on_time(self, lenght_bar, number_bars):
-        # Testa se a nota ultrapassa o limite de tempo
         max_leght = 64 * number_bars
-        current_lenght = self.lenght + lenght_bar
+        current_lenght = self.lenght["duration"] + lenght_bar
+
         return True if current_lenght <= max_leght else False
 
-    def is_valid(self, lenght_bar, last_note_was_played):
-        # Impede que a primeira nota seja uma pausa
-        if lenght_bar == 0 and not self.is_played:
+    def is_on_interval(self, max_interval, previous_note_value):
+        high_interval = previous_note_value + max_interval
+        low_interval = previous_note_value - max_interval
+
+        return True if low_interval <= self.note["value"] <= high_interval else False
+
+    def is_valid(self, lenght_bar, number_of_bars, previous_note, max_interval):
+        # Prevents two rests in a row
+        if previous_note.is_played is False and self.is_played is False:
             return False
 
-        # Impede que ocorram duas pausas seguidas
-        if last_note_was_played is False and self.is_played is False:
+        # Check if the note is inside of the interval
+        if self.is_on_time(lenght_bar, number_of_bars) is False:
+            return False
+
+        # Test if the note fits in the bar lenght
+        if self.is_on_interval(max_interval, previous_note.note["value"]) is False:
             return False
 
         return True
-
-    def is_on_interval(self, max_interval, last_note_value):
-        # Não permite que a nota seja tenha um intervalo maior que o intervalo maximo
-        high_interval = last_note_value + max_interval
-        low_interval = last_note_value - max_interval
-
-        return True if low_interval < self.value < high_interval else False
 
 
 class MelodyBar(object):
     def __init__(self):
         self.notes = []
+        self.lenght = 0
 
     def generate_melody(self, number_bars, max_interval):
         self.notes.clear()
+        self.lenght = 0
 
-        lenght_bar = 0
-        last_note = MusicalNote()
+        first_note = self.generate_first_note()
+        previous_note = first_note
 
-        # A duração de um tempo é 64 unidades de tempo
-        while lenght_bar != 64 * number_bars:
+        while self.lenght != BAR_LENGHT * number_bars:
             note = MusicalNote()
 
-            if note.is_valid(lenght_bar, last_note.is_played) and note.is_on_time(lenght_bar, number_bars):
-                if note.is_played:
-                    if note.is_on_interval(max_interval, last_note.value):
-                        lenght_bar = self.add_note_to_melody(note, lenght_bar)
-                        last_note = note
-                else:
-                    lenght_bar = self.add_note_to_melody(note, lenght_bar)
-                    last_note = note
+            if note.is_valid(self.lenght, number_bars, previous_note, max_interval):
+                self.add_note_to_melody(note)
+                previous_note = note
+
+    def generate_first_note(self):
+        first_note = MusicalNote()
+
+        while first_note.is_played is False:  # Prevents the first note from being a rest
+            first_note = MusicalNote()
+
+        self.add_note_to_melody(first_note)
+
+        return first_note
+
+    def add_note_to_melody(self, note):
+        self.notes.append(note)
+        self.lenght += note.lenght["duration"]
 
     def print_melody(self):
         for note in self.notes:
-            if note.on_or_off:
-                print(str(note.note[0]) + " " + str(note.lenght))
+            if note.is_played:
+                print(f'{note.note["name"]}\t\t{note.lenght["duration"]}\t{note.lenght["name"]}')
             else:
-                print("Break " + str(note.lenght))
-
-    def add_note_to_melody(self, note, lenght_bar):
-        self.notes.append(note)
-        lenght_bar += note.lenght
-        return lenght_bar
+                print(f'Rest\t{note.lenght["duration"]}\t{note.lenght["name"]}')
 
 
 class MelodyPlayer(object):
     def __init__(self):
         self.player = Player()
-        self.synthesizer = Synthesizer(osc1_waveform=Waveform.sawtooth, osc1_volume=1.0, use_osc2=False)
+
+        self.synthesizer = Synthesizer(osc1_waveform=WAVEFORM[SHAPE], osc1_volume=1.0, use_osc2=False)
 
     def play_melody(self, melody, bpm):
         self.player.open_stream()
@@ -112,7 +126,7 @@ class MelodyPlayer(object):
             sound = self.generate_waves(note, bpm)
 
             if note == melody.notes[0]:
-                # Gera a primeira nota
+                # Generates the first note
                 writer.write_wave(outfile, sound)
                 continue
 
@@ -121,30 +135,31 @@ class MelodyPlayer(object):
             infiles = [outfile, next_note]
 
             for infile in infiles:
-                w = wave.open(infile, 'rb')
-                data.append([w.getparams(), w.readframes(w.getnframes())])
-                w.close()
+                with wave.open(infile, 'rb') as w:
+                    data.append([w.getparams(), w.readframes(w.getnframes())])
 
-            output = wave.open(outfile, 'wb')
-            output.setparams(data[0][0])
-            output.writeframes(data[0][1])
-            output.writeframes(data[1][1])
-            output.close()
+            self.append_note(outfile, data)
 
-            # Deleta o arquivo da nota
+            # Deletes the note file
             os.remove(next_note)
 
-            data.clear()
+    @staticmethod
+    def append_note(outfile, data):
+        output = wave.open(outfile, 'wb')
+        output.setparams(data[0][0])
+        output.writeframes(data[0][1])
+        output.writeframes(data[1][1])
+        output.close()
+
+        data.clear()
 
     def generate_waves(self, note, bpm):
-        lenght = note.lenght / 16 * 60 / bpm
+        lenght = note.lenght["duration"] / 16 * 60 / bpm
 
-        if note.on_or_off:
-            frequency = note.note[1]
-            return self.synthesizer.generate_constant_wave(frequency, lenght)
-        else:
-            # Caso seja uma pausa, não toca nota
-            return self.synthesizer.generate_constant_wave(0, lenght)
+        # If the not is not played, the frequency is 0
+        frequency = note.note["frequency"] if note.is_played else 0
+
+        return self.synthesizer.generate_constant_wave(frequency, lenght)
 
 
 if __name__ == "__main__":

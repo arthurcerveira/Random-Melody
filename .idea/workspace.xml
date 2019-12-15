@@ -2,9 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="bd870093-5ad0-4253-9bc2-063d1347ffe1" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/melody_generator.py" beforeDir="false" afterPath="$PROJECT_DIR$/melody_generator.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/notes.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/notes.json" beforeDir="false" afterPath="$PROJECT_DIR$/notes.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -149,7 +150,9 @@
       <workItem from="1566485138236" duration="182000" />
       <workItem from="1567689671455" duration="754000" />
       <workItem from="1567696334160" duration="70000" />
-      <workItem from="1576295546020" duration="3380000" />
+      <workItem from="1576295546020" duration="5730000" />
+      <workItem from="1576342579500" duration="7313000" />
+      <workItem from="1576433895442" duration="5064000" />
     </task>
     <servers />
   </component>
@@ -170,26 +173,30 @@
     </option>
   </component>
   <component name="WindowStateProjectService">
-    <state x="2572" y="357" width="606" height="401" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1576296729401">
+    <state x="2572" y="357" width="606" height="408" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1576436691116">
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>
-    <state x="2572" y="357" width="606" height="401" key="#com.intellij.fileTypes.FileTypeChooser/1920.0.1920.1080/0.172.1920.1052@1920.0.1920.1080" timestamp="1576296729401" />
-    <state width="1870" height="330" key="GridCell.Tab.0.bottom" timestamp="1576298094255">
+    <state x="2572" y="357" width="606" height="408" key="#com.intellij.fileTypes.FileTypeChooser/1920.0.1920.1080/0.172.1920.1052@1920.0.1920.1080" timestamp="1576436691116" />
+    <state width="1870" height="271" key="GridCell.Tab.0.bottom" timestamp="1576438829560">
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>
-    <state width="1870" height="330" key="GridCell.Tab.0.bottom/1920.0.1920.1080/0.172.1920.1052@1920.0.1920.1080" timestamp="1576298094255" />
-    <state width="1870" height="330" key="GridCell.Tab.0.center" timestamp="1576298094254">
+    <state width="1870" height="271" key="GridCell.Tab.0.bottom/1920.0.1920.1080/0.172.1920.1052@1920.0.1920.1080" timestamp="1576438829560" />
+    <state width="1870" height="271" key="GridCell.Tab.0.center" timestamp="1576438829560">
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>
-    <state width="1870" height="330" key="GridCell.Tab.0.center/1920.0.1920.1080/0.172.1920.1052@1920.0.1920.1080" timestamp="1576298094254" />
-    <state width="1870" height="330" key="GridCell.Tab.0.left" timestamp="1576298094254">
+    <state width="1870" height="271" key="GridCell.Tab.0.center/1920.0.1920.1080/0.172.1920.1052@1920.0.1920.1080" timestamp="1576438829560" />
+    <state width="1870" height="271" key="GridCell.Tab.0.left" timestamp="1576438829560">
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>
-    <state width="1870" height="330" key="GridCell.Tab.0.left/1920.0.1920.1080/0.172.1920.1052@1920.0.1920.1080" timestamp="1576298094254" />
-    <state width="1870" height="330" key="GridCell.Tab.0.right" timestamp="1576298094254">
+    <state width="1870" height="271" key="GridCell.Tab.0.left/1920.0.1920.1080/0.172.1920.1052@1920.0.1920.1080" timestamp="1576438829560" />
+    <state width="1870" height="271" key="GridCell.Tab.0.right" timestamp="1576438829560">
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>
-    <state width="1870" height="330" key="GridCell.Tab.0.right/1920.0.1920.1080/0.172.1920.1052@1920.0.1920.1080" timestamp="1576298094254" />
+    <state width="1870" height="271" key="GridCell.Tab.0.right/1920.0.1920.1080/0.172.1920.1052@1920.0.1920.1080" timestamp="1576438829560" />
+    <state x="2538" y="381" key="com.intellij.ide.util.TipDialog" timestamp="1576433896783">
+      <screen x="1920" y="0" width="1920" height="1080" />
+    </state>
+    <state x="2538" y="381" key="com.intellij.ide.util.TipDialog/1920.0.1920.1080/0.172.1920.1052@1920.0.1920.1080" timestamp="1576433896783" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -203,8 +210,8 @@
     </breakpoint-manager>
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/Random_Melody_Generator$melody_generator.coverage" NAME="melody_generator Coverage Results" MODIFIED="1576296704155" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/Random_Melody_Generator$GUI.coverage" NAME="GUI Coverage Results" MODIFIED="1567689824762" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/Random_Melody_Generator$melody_generator.coverage" NAME="melody_generator Coverage Results" MODIFIED="1576438829551" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/Random_Melody_Generator$GUI.coverage" NAME="GUI Coverage Results" MODIFIED="1576434189310" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/Random_Melody_Generator$melodyGenerator.coverage" NAME="melodyGenerator Coverage Results" MODIFIED="1565740200463" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>
