@@ -24,59 +24,73 @@
     "notes":[
         {
             "name":"C3",
-            "frequency":130.81
+            "frequency":130.81,
+            "value":0
         },
         {
             "name":"D3",
-            "frequency":146.83
+            "frequency":146.83,
+            "value":1
         },
         {
             "name":"E3",
-            "frequency":164.81
+            "frequency":164.81,
+            "value":2
         },
         {
             "name":"F3",
-            "frequency":174.61
+            "frequency":174.61,
+            "value":3
         },
         {
             "name":"G3",
-            "frequency":196.00
+            "frequency":196.00,
+            "value":4
         },
         {
             "name":"A3",
-            "frequency":220.00
+            "frequency":220.00,
+            "value":5
         },
         {
             "name":"B3",
-            "frequency":246.94
+            "frequency":246.94,
+            "value":6
         },
         {
             "name":"C4",
-            "frequency":261.63
+            "frequency":261.63,
+            "value":7
         },
         {
             "name":"D4",
-            "frequency":293.66
+            "frequency":293.66,
+            "value":8
         },
         {
             "name":"E4",
-            "frequency":329.63
+            "frequency":329.63,
+            "value":9
         },
         {
             "name":"F4",
-            "frequency":349.23
+            "frequency":349.23,
+            "value":10
         },
         {
             "name":"G4",
-            "frequency":392.00
+            "frequency":392.00,
+            "value":11
         },
         {
             "name":"A4",
-            "frequency":440.00
+            "frequency":440.00,
+            "value":12
         },
         {
             "name":"B4",
-            "frequency":493.88
+            "frequency":493.88,
+            "value":13
         }
     ]
 }
