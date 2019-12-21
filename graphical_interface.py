@@ -6,7 +6,7 @@
 #
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-from melody_generator import MelodyBar, MelodyPlayer
+from melody_generator import Melody, MelodyPlayer, OSCILLATOR
 
 
 class Ui_MainWindow(object):
@@ -25,8 +25,8 @@ class Ui_MainWindow(object):
         self.generate_melody_btn = QtWidgets.QPushButton(self.centralwidget)
         self.label_2 = QtWidgets.QLabel(self.centralwidget)
 
-        self.melody_bar = MelodyBar()
-        self.melody_player = MelodyPlayer()
+        self.melody_bar = Melody()
+        self.melody_player = MelodyPlayer(OSCILLATOR)
 
     def setup_ui(self, window):
         window.setObjectName("MainWindow")
@@ -101,48 +101,45 @@ class Ui_MainWindow(object):
             interval = int(self.interval_input.text())
             bars = int(self.bars_input.text())
         except ValueError:
-            self.user_feedback.setText("Invalid Parameter.")
+            self.user_feedback.setGeometry(QtCore.QRect(118, 340, 250, 20))
+            self.user_feedback.setText("Invalid parameter.")
             return
 
-        if interval and bars:
-            self.melody_bar.generate_melody(bars, interval)
-            self.user_feedback.setText("Melody created succesfully.")
-        else:
-            self.user_feedback.setText("The parmeters can't be blank.")
+        self.melody_bar.generate_melody(bars, interval)
+        self.user_feedback.setGeometry(QtCore.QRect(90, 340, 250, 20))
+        self.user_feedback.setText("Melody created succesfully.")
 
     def play_melody(self):
         try:
             bpm = int(self.bpm_input.text())
         except ValueError:
-            self.user_feedback.setText("Invalid Parameter.")
+            self.user_feedback.setGeometry(QtCore.QRect(118, 340, 250, 20))
+            self.user_feedback.setText("Invalid parameter.")
             return
 
-        if bpm:
-            if self.melody_bar is not None:
-                self.user_feedback.setText("Playing Melody")
-                self.melody_player.play_melody(self.melody_bar, bpm)
-                self.user_feedback.setText("")
-            else:
-                self.user_feedback.setText("You must generate the melody frist.")
+        if self.melody_bar.notes:
+            self.user_feedback.setText("Playing Melody")
+            self.melody_player.play_melody(self.melody_bar, bpm)
+            self.user_feedback.setText("")
         else:
-            self.user_feedback.setText("The parmeters can't be blank.")
+            self.user_feedback.setGeometry(QtCore.QRect(68, 340, 250, 20))
+            self.user_feedback.setText("You must generate the melody frist.")
 
     def save_melody(self):
         try:
             bpm = int(self.bpm_input.text())
         except ValueError:
-            self.user_feedback.setText("Invalid Parameter.")
+            self.user_feedback.setGeometry(QtCore.QRect(118, 340, 250, 20))
+            self.user_feedback.setText("Invalid parameter.")
             return
 
-        if bpm:
-            if self.melody_bar is not None:
-                self.user_feedback.setText("Generating file")
-                self.melody_player.save_melody(self.melody_bar, bpm)
-                self.user_feedback.setText("File saved")
-            else:
-                self.user_feedback.setText("You must generate the melody frist.")
+        if self.melody_bar.notes:
+            self.melody_player.save_melody(self.melody_bar, bpm)
+            self.user_feedback.setGeometry(QtCore.QRect(130, 340, 250, 20))
+            self.user_feedback.setText("Saved as WAV")
         else:
-            self.user_feedback.setText("The parmeters can't be blank.")
+            self.user_feedback.setGeometry(QtCore.QRect(68, 340, 250, 20))
+            self.user_feedback.setText("You must generate the melody frist.")
 
 
 if __name__ == "__main__":
